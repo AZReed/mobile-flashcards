@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Deck from "./components/Deck";
+import Decks from "./components/Decks";
 
 export default class App extends React.Component {
   render() {
     return (
-      <Deck />
+      <Decks />
     );
   }
 }
