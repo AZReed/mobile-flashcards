@@ -1,35 +1,26 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Button, Card, List, ListItem } from "react-native-elements";
+//mport { StyleSheet, View, Text } from "react-native";
+//import { Button, Card, List, ListItem, Badge, Header } from "react-native-elements";
+import { Badge, Card, CardItem, View, Body, Text } from "native-base";
 import { Entypo } from "@expo/vector-icons";
 
 export default class Decks extends Component {
-
-  deckCards = decks => {
-    let arr = [];
-    Object.keys(decks).map( deck => {
-      arr.push(
-        <Card key={decks[deck]['title']} title={decks[deck]['title']}>
-          <Text>({decks[deck]['questions'].length}) questions</Text>
-        </Card>
-      );
-    });
-    return arr;
-  };
+  deckCards = decks => (
+    Object.keys(decks).map(deck => (
+      <Card key={decks[deck]["title"]}>
+        <CardItem >
+          <Body>
+            <Text>{decks[deck]["title"]}</Text>
+            <Badge>
+              <Text>{decks[deck]["questions"].length}</Text>
+            </Badge>
+          </Body>
+        </CardItem>
+    </Card>
+      ))
+  );
 
   render() {
-    const list = [
-      {
-        title: "Appointments",
-        icon: "av-timer"
-      },
-      {
-        title: "Trips",
-        icon: "flight-takeoff"
-      }
-      // more items
-    ];
-
     const decks = {
       React: {
         title: "React",
@@ -57,19 +48,14 @@ export default class Decks extends Component {
     };
 
     return (
-      <View style={styles.container}>
-        <View style={styles.item}>
-          <Text>hello</Text>
-        </View>
-        <View style={styles.item}>
-          {this.deckCards(decks)}
-        </View>
+      <View>
+        {this.deckCards(decks)}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center"
@@ -77,4 +63,4 @@ const styles = StyleSheet.create({
   item: {
     alignItems: "center"
   }
-});
+}); */
