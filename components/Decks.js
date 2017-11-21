@@ -1,23 +1,27 @@
 import React, { Component } from "react";
-//mport { StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 //import { Button, Card, List, ListItem, Badge, Header } from "react-native-elements";
 import { Badge, Card, CardItem, View, Body, Text } from "native-base";
 import { Entypo } from "@expo/vector-icons";
 
 export default class Decks extends Component {
   deckCards = decks => (
-    Object.keys(decks).map(deck => (
-      <Card key={decks[deck]["title"]}>
-        <CardItem >
+    <Card style={styles.container}>
+      {Object.keys(decks).map(deck => (
+        <CardItem key={decks[deck]["title"]} style={styles.item}>
           <Body>
-            <Text>{decks[deck]["title"]}</Text>
+            <View>
+              <TouchableOpacity onPress={() => console.log(decks[deck]['title'])}>
+                <Text>{decks[deck]["title"]}</Text>
+              </TouchableOpacity>
+            </View>
             <Badge>
               <Text>{decks[deck]["questions"].length}</Text>
             </Badge>
           </Body>
         </CardItem>
+      ))}
     </Card>
-      ))
   );
 
   render() {
@@ -49,11 +53,47 @@ export default class Decks extends Component {
 
     return (
       <View>
-        {this.deckCards(decks)}
+        {/* this.deckCards(decks) */}
+        <Card>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+          <CardItem>
+            <Text>Google Plus</Text>
+            <Text>-></Text>
+          </CardItem>
+        </Card>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+    justifyContent: 'center'
+  },
+  item: {
+    //alignItems: 'center',
+  }
+})
 
 /* const styles = StyleSheet.create({
   container: {
