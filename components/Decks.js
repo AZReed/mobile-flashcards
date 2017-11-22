@@ -1,17 +1,37 @@
 import React, { Component } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 //import { Button, Card, List, ListItem, Badge, Header } from "react-native-elements";
-import { Badge, Card, CardItem, View, Body, Text } from "native-base";
+import {
+  Container,
+  Badge,
+  Card,
+  Content,
+  CardItem,
+  View,
+  Body,
+  Text
+} from "native-base";
 import { Entypo } from "@expo/vector-icons";
+//import { connect } from "react-redux";
+import { addDeck, saveDeckTitle } from "../utils/api";
+import { retrieveDecks } from "../actions";
 
-export default class Decks extends Component {
+class Decks extends Component {
+
+  componentDidMount() {
+    console.log(retrieveDecks())
+    /* this.props.retrieveDecks(); */
+  }
+
   deckCards = decks => (
     <Card style={styles.container}>
       {Object.keys(decks).map(deck => (
         <CardItem key={decks[deck]["title"]} style={styles.item}>
           <Body>
             <View>
-              <TouchableOpacity onPress={() => console.log(decks[deck]['title'])}>
+              <TouchableOpacity
+                onPress={() => console.log(decks[deck]["title"])}
+              >
                 <Text>{decks[deck]["title"]}</Text>
               </TouchableOpacity>
             </View>
@@ -23,6 +43,11 @@ export default class Decks extends Component {
       ))}
     </Card>
   );
+
+  handleClick = (title) => {
+    saveDeckTitle(title);
+    console.log(title, retrieveDecks())
+  }
 
   render() {
     const decks = {
@@ -48,59 +73,56 @@ export default class Decks extends Component {
               "The combination of a function and the lexical environment within which that function was declared."
           }
         ]
+      },
+      Foobar: {
+        title: "Foobar",
+        questions: [
+          {
+            question: "What is a closure?",
+            answer:
+              "The combination of a function and the lexical environment within which that function was declared."
+          }
+        ]
       }
     };
 
     return (
       <View>
-        {/* this.deckCards(decks) */}
-        <Card>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-          <CardItem>
-            <Text>Google Plus</Text>
-            <Text>-></Text>
-          </CardItem>
-        </Card>
+        <View style={styles.container}>
+          {Object.keys(decks).map((deck, num) => (
+            <View key={decks[deck]["title"]} style={styles.item}>
+              <TouchableOpacity onPress={() => this.handleClick(decks[deck]["title"])}>
+                <Text>{decks[deck]["title"]} ({decks[deck]["questions"].length} cards)</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => this.addDeck()}>
+              <Text>Add Deck</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-    justifyContent: 'center'
-  },
-  item: {
-    //alignItems: 'center',
+function mapDispatchToProps(dispatch) {
+  return {
+    retrieveDecks: () => dispatch(retrieveDecks())
   }
-})
+}
 
-/* const styles = StyleSheet.create({
+export default Decks;
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "space-between",
+    alignItems: "stretch",
+    marginTop: 100
   },
   item: {
-    alignItems: "center"
+    height: 25
   }
-}); */
+});

@@ -1,8 +1,10 @@
-export const GET_DECKS = "GET_DECKS";
+import { getDecks } from "../utils/api";
 
-export function getDecks(decks) {
+export const RETRIEVE_DECKS = "RETRIEVE_DECKS";
+export function retrieveDecks() {
+    let decks = getDecks();
     return {
-        type: GET_DECKS,
+        type: RETRIEVE_DECKS,
         decks
     }
 }

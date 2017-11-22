@@ -8,17 +8,6 @@ import CustomStatusBar from "./CustomStatusBar";
 import { StackNavigator } from "react-navigation";
 import Decks from "./Decks";
 
-const Foobar = function(){
-	return (
-		<View>
-			<Text>This is the Foobar view</Text>
-			<TouchableOpacity >
-				<Text>Press here for the Dashboard</Text>
-			</TouchableOpacity>
-		</View>
-	);
-};
-
 const Dashboard = () => (
   <View>
     <Text>This is the Dashboard</Text>
