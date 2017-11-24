@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-//import { Button, Card, List, ListItem, Badge, Header } from "react-native-elements";
 import {
   Container,
   Badge,
@@ -12,94 +11,48 @@ import {
   Text
 } from "native-base";
 import { Entypo } from "@expo/vector-icons";
-//import { connect } from "react-redux";
-import { addDeck, saveDeckTitle } from "../utils/api";
+import { addDeck, saveDeckTitle, getDecks } from "../utils/api";
 import { retrieveDecks } from "../actions";
+import { NavigationActions } from "react-navigation";
+import { connect } from "react-redux";
 
 class Decks extends Component {
-
   componentDidMount() {
-    console.log(retrieveDecks())
-    /* this.props.retrieveDecks(); */
+    this.props.retrieveDecks();
   }
 
-  deckCards = decks => (
-    <Card style={styles.container}>
-      {Object.keys(decks).map(deck => (
-        <CardItem key={decks[deck]["title"]} style={styles.item}>
-          <Body>
-            <View>
-              <TouchableOpacity
-                onPress={() => console.log(decks[deck]["title"])}
-              >
-                <Text>{decks[deck]["title"]}</Text>
-              </TouchableOpacity>
-            </View>
-            <Badge>
-              <Text>{decks[deck]["questions"].length}</Text>
-            </Badge>
-          </Body>
-        </CardItem>
-      ))}
-    </Card>
-  );
+  goToDeck = title => {
+    this.props.navigation.navigate("Deck", this.props.decks[title])
+  };
 
-  handleClick = (title) => {
-    saveDeckTitle(title);
-    console.log(title, retrieveDecks())
-  }
+  addDeck = () => {
+    this.props.navigation.navigate("AddDeck");
+  };
 
   render() {
-    const decks = {
-      React: {
-        title: "React",
-        questions: [
-          {
-            question: "What is React?",
-            answer: "A library for managing user interfaces"
-          },
-          {
-            question: "Where do you make Ajax requests in React?",
-            answer: "The componentDidMount lifecycle event"
-          }
-        ]
-      },
-      JavaScript: {
-        title: "JavaScript",
-        questions: [
-          {
-            question: "What is a closure?",
-            answer:
-              "The combination of a function and the lexical environment within which that function was declared."
-          }
-        ]
-      },
-      Foobar: {
-        title: "Foobar",
-        questions: [
-          {
-            question: "What is a closure?",
-            answer:
-              "The combination of a function and the lexical environment within which that function was declared."
-          }
-        ]
-      }
-    };
+
+    const { decks } = this.props;
 
     return (
-      <View>
-        <View style={styles.container}>
-          {Object.keys(decks).map((deck, num) => (
-            <View key={decks[deck]["title"]} style={styles.item}>
-              <TouchableOpacity onPress={() => this.handleClick(decks[deck]["title"])}>
-                <Text>{decks[deck]["title"]} ({decks[deck]["questions"].length} cards)</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
+      <View style={styles.container}>
+        <View style={styles.decks}>
+          {this.props.decks &&
+            Object.keys(this.props.decks).map((deck, num) => (
+              <View key={decks[deck]["title"]} style={styles.item}>
+                <TouchableOpacity
+                  onPress={() => this.goToDeck(decks[deck]["title"])}
+                >
+                  <Text>
+                    {decks[deck]["title"]} ({decks[deck]["questions"].length}{" "}
+                    cards)
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
         </View>
-        <View>
+        <View style={styles.addButton}>
           <TouchableOpacity onPress={() => this.addDeck()}>
-              <Text>Add Deck</Text>
+            <Text>Add Deck</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -107,16 +60,22 @@ class Decks extends Component {
   }
 }
 
+function mapStateToProps({ decks }) {
+  return {
+    decks
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     retrieveDecks: () => dispatch(retrieveDecks())
-  }
+  };
 }
 
-export default Decks;
+export default connect(mapStateToProps, mapDispatchToProps)(Decks);
 
 const styles = StyleSheet.create({
-  container: {
+  decks: {
     flex: 1,
     justifyContent: "space-between",
     alignItems: "stretch",
@@ -124,5 +83,9 @@ const styles = StyleSheet.create({
   },
   item: {
     height: 25
+  },
+  addButton: {
+    alignItems: "center",
+    marginTop: 400
   }
 });

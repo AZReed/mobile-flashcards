@@ -7,6 +7,8 @@ import {
 import CustomStatusBar from "./CustomStatusBar";
 import { StackNavigator } from "react-navigation";
 import Decks from "./Decks";
+import AddDeck from "./AddDeck";
+import Deck from "./Deck";
 
 const Dashboard = () => (
   <View>
@@ -21,12 +23,18 @@ const Stack = StackNavigator({
 			title: 'Decks'
 		}
 	},
-	Dashboard: {
-		screen: Dashboard,
+	AddDeck: {
+		screen: AddDeck,
 		navigationOptions: {
-			title: 'Dashboard'
+			title: 'Add New Deck'
 		}
-  },
+	},
+	Deck: {
+		screen: Deck,
+		navigationOptions: {
+			title: 'Deck'
+		}
+	}
 })
 
 class Home extends Component {
