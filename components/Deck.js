@@ -1,29 +1,65 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+//import { retrieveDeck } from "../actions";
+//import { connect } from "react-redux";
 
 class Deck extends Component {
-  componentDidMount() {
-    console.log("mount DECK", this.props.navigation.state.params);
-  }
+  /*   componentDidMount() {
+    const deck = this.props.navigation.state.params;
+    this.props.retrieveDeck(deck.title)
+  } */
 
   addCard = () => {
     console.log("add Card");
   };
 
+  startQuiz = () => {};
+
   render() {
     const deck = this.props.navigation.state.params;
-    console.log("deck", deck);
     return (
       <View style={styles.deck}>
-        <Text>{deck.title} {deck.questions.length}</Text>
-        <TouchableOpacity onPress={() => this.addCard()}>
+        <Text>
+          {deck.title} {deck.questions.length}
+        </Text>
+        {/*         <TouchableOpacity onPress={() => this.addCard()}>
           <Button>Add Card</Button>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center"
+          }}
+        >
+          <View
+            style={{ marginTop: 100, width: 200, height: 50, backgroundColor: "powderblue" }}
+          >
+            <Button
+              onPress={() => this.addCard()}
+              title="Add Card"
+            />
+          </View>
+          <View
+            style={{ marginTop: 150, width: 200, height: 50, backgroundColor: "powderblue" }}
+          >
+            <Button
+              onPress={() => this.startQuiz()}
+              title="Start Quiz"
+            />
+          </View>
+        </View>
       </View>
     );
   }
 }
+/* 
+function mapDispatchToProps(dispatch) {
+  return {
+    retrieveDeck: deck => dispatch(retrieveDeck(deck))
+  }
+} */
 
+//export default connect(null, mapDispatchToProps)(Deck);
 export default Deck;
 
 const styles = StyleSheet.create({

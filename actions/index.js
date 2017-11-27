@@ -1,36 +1,25 @@
-import { getDecks } from "../utils/api";
+import { getDecks, getDeck } from "../utils/api";
 
 export const RETRIEVE_DECKS = "RETRIEVE_DECKS";
 export const retrieveDecks = () => {
-
   return dispatch => {
-    getDecks(function(data){
+    getDecks(function(data) {
       dispatch({
         type: RETRIEVE_DECKS,
         decks: data
-      })
-    })
-  }
-  
-/*   getDecks(function(data) {
-    return dispatch => {
-      dispatch({
-        type: RETRIEVE_DECKS,
-        decks: getDecks()
       });
-    };
-  }); */
-  //let foobar = JSON.parse(decks);
+    });
+  };
+};
 
-  //console.log("decks action", foobar['React']);
-
-  /*   return {
-    type: RETRIEVE_DECKS,
-    decks: 'foobar'
-  } */
-  /*   return dispatch => {
-    dispatch({
-      type: RETRIEVE_DECKS,
-      decks: getDecks()
-    }); */
+export const RETRIEVE_DECK = "RETRIEVE_DECK";
+export const retrieveDeck = deck => {
+  return dispatch => {
+    getDeck(function(data) {
+      dispatch({
+        type: RETRIEVE_DECK,
+        deck: data
+      })
+    }, deck);
+  };
 };
