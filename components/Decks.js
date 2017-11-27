@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet} from "react-native";
 import {
   Container,
   Badge,
@@ -11,7 +11,7 @@ import {
   Text
 } from "native-base";
 import { Entypo } from "@expo/vector-icons";
-import { addDeck, saveDeckTitle, getDecks } from "../utils/api";
+//import { addDeck, saveDeckTitle, getDecks } from "../utils/api";
 import { retrieveDecks } from "../actions";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 class Decks extends Component {
   componentDidMount() {
     this.props.retrieveDecks();
+    console.log('decks mounted')
   }
 
   goToDeck = title => {
@@ -61,6 +62,7 @@ class Decks extends Component {
 }
 
 function mapStateToProps({ decks }) {
+  console.log('decks')
   return {
     decks
   };

@@ -10,7 +10,9 @@ class Deck extends Component {
   } */
 
   addCard = () => {
-    console.log("add Card");
+    const deck = this.props.navigation.state.params;
+    console.log(deck)
+    this.props.navigation.navigate("AddCard", deck);
   };
 
   startQuiz = () => {};
@@ -22,9 +24,6 @@ class Deck extends Component {
         <Text>
           {deck.title} {deck.questions.length}
         </Text>
-        {/*         <TouchableOpacity onPress={() => this.addCard()}>
-          <Button>Add Card</Button>
-        </TouchableOpacity> */}
         <View
           style={{
             flex: 1,

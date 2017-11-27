@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, TextInput, Button } from "react-native";
-import { saveDeckTitle } from "../utils/api";
+import { addDeck } from "../actions";
 
 class AddDeck extends Component {
   state = {
@@ -8,8 +8,8 @@ class AddDeck extends Component {
   };
 
   submit = () => {
-		//saveDeckTitle(this.state.text)
-		console.log(this.props.navigation.goBack())
+    addDeck(this.state.text)
+		//this.props.navigation.goBack()
   };
 
   render() {

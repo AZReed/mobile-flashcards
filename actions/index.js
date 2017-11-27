@@ -1,4 +1,4 @@
-import { getDecks, getDeck } from "../utils/api";
+import { getDecks, getDeck, addCardToDeck, saveDeckTitle } from "../utils/api";
 
 export const RETRIEVE_DECKS = "RETRIEVE_DECKS";
 export const retrieveDecks = () => {
@@ -19,7 +19,30 @@ export const retrieveDeck = deck => {
       dispatch({
         type: RETRIEVE_DECK,
         deck: data
-      })
+      });
     }, deck);
+  };
+};
+
+export const ADD_DECK = "ADD_DECK";
+export const addDeck = title => {
+  return dispatch => {
+    saveDeckTitle(function(data) {
+      dispatch({
+        type: ADD_DECK,
+        deck: data
+      });
+    }, title);
+  };
+};
+
+export const ADD_CARD = "ADD_CARD";
+export const addCard = (title, card) => {
+  return dispatch => {
+    addCardToDeck(card);
+    dispatch({
+      type: ADD_CARD,
+      card
+    });
   };
 };
