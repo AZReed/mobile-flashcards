@@ -11,12 +11,11 @@ export const getDeck = (callback, title) =>
     return callback(decks[title]);
   });
 
-export const saveDeckTitle = (callback, title) => {
-  console.log("api", title);
+export const saveDeckTitle = (title, callback) => {
   let deck = { [title]: { title: title, questions: [] } };
-  return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(deck)).then(data =>
-    callback(data)
-  );
+  return AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(deck)).then(() => {
+    return callback(deck);
+  });
 };
 
 export const addCardToDeck = (card, title) => {};

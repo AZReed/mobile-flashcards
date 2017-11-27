@@ -7,14 +7,17 @@ import {
   TouchableOpacity,
   TextInput
 } from "react-native";
+import { addCard } from "../actions";
 
 class AddCard extends Component {
   state = {
-    text: ""
+		question: "",
+		answer: ""
 	};
 
 	submit = () => {
-		console.log('submit add card')
+		console.log('submit add card', this.state.question);
+		
 	}
 
   render() {
@@ -24,10 +27,16 @@ class AddCard extends Component {
         <Text>Add a New Card to {deck.title} Deck</Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => this.setState({ text })}
-          value={this.state.text}
-        />
+          onChangeText={question => this.setState({ question })}
+          value={this.state.question}
+				/>
 
+				<Text>Answer</Text>
+				<TextInput
+          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+          onChangeText={answer => this.setState({ answer })}
+          value={this.state.answer}
+				/>
         <Button
           style={{ padding: 10 }}
           onPress={() => this.submit()}

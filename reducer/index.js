@@ -15,9 +15,8 @@ function decks(state = {}, action) {
 			}
 
 		case ADD_DECK:
-			console.log('reducer', action)
+			console.log('add deck', action.deck)
 			return {
-				...state,
 				newDeck: action.deck
 			}
 

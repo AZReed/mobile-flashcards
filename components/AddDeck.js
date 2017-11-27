@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 import { addDeck } from "../actions";
+import { saveDeckTitle } from "../utils/api";
+import { connect } from "react-redux";
 
 class AddDeck extends Component {
   state = {
@@ -8,8 +10,11 @@ class AddDeck extends Component {
   };
 
   submit = () => {
-    addDeck(this.state.text)
-		//this.props.navigation.goBack()
+    this.props.addDeck(this.state.text)
+/*     saveDeckTitle(function(data){
+      console.log('eo', data)
+    },this.state.text) */
+		this.props.navigation.goBack()
   };
 
   render() {
@@ -32,7 +37,13 @@ class AddDeck extends Component {
   }
 }
 
-export default AddDeck;
+function mapDispatchToProps(dispatch){
+  return {
+    addDeck: (title) => dispatch(addDeck(title))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddDeck);
 
 const styles = StyleSheet.create({
   container: {

@@ -27,12 +27,12 @@ export const retrieveDeck = deck => {
 export const ADD_DECK = "ADD_DECK";
 export const addDeck = title => {
   return dispatch => {
-    saveDeckTitle(function(data) {
+    saveDeckTitle(title, function(deck) {
       dispatch({
         type: ADD_DECK,
-        deck: data
+        deck: deck
       });
-    }, title);
+    });
   };
 };
 

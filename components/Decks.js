@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet} from "react-native";
+import { TouchableOpacity, StyleSheet, AsyncStorage} from "react-native";
 import {
   Container,
   Badge,
@@ -20,6 +20,11 @@ class Decks extends Component {
   componentDidMount() {
     this.props.retrieveDecks();
     console.log('decks mounted')
+    //AsyncStorage.clear(()=>console.log('done'))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('did update')
   }
 
   goToDeck = title => {
@@ -61,8 +66,10 @@ class Decks extends Component {
   }
 }
 
-function mapStateToProps({ decks }) {
-  console.log('decks')
+function mapStateToProps({ decks, deck, newDeck }) {
+  console.log('decks', decks)
+  console.log('deck', deck)
+  console.log('newDeck', newDeck)
   return {
     decks
   };
