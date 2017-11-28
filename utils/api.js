@@ -18,7 +18,10 @@ export const saveDeckTitle = (title, callback) => {
   });
 };
 
-export const addCardToDeck = (card, title) => {};
+export const addCardToDeck = (card, title, callback) => {
+  let card_obj = { question: card.question, answer: card.answer };
+  
+};
 
 /* getDeck
 addCardToDeck */

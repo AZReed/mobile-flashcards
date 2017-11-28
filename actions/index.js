@@ -30,7 +30,7 @@ export const addDeck = title => {
     saveDeckTitle(title, function(deck) {
       dispatch({
         type: ADD_DECK,
-        deck: deck
+        deck: deck,
       });
     });
   };
@@ -39,10 +39,11 @@ export const addDeck = title => {
 export const ADD_CARD = "ADD_CARD";
 export const addCard = (title, card) => {
   return dispatch => {
-    addCardToDeck(card);
-    dispatch({
-      type: ADD_CARD,
-      card
+    addCardToDeck(title, card, function(data){
+      dispatch({
+        type: ADD_CARD,
+        card: data
+      });
     });
   };
 };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet, AsyncStorage} from "react-native";
+import { TouchableOpacity, StyleSheet, AsyncStorage } from "react-native";
 import {
   Container,
   Badge,
@@ -11,7 +11,6 @@ import {
   Text
 } from "native-base";
 import { Entypo } from "@expo/vector-icons";
-//import { addDeck, saveDeckTitle, getDecks } from "../utils/api";
 import { retrieveDecks } from "../actions";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
@@ -19,16 +18,11 @@ import { connect } from "react-redux";
 class Decks extends Component {
   componentDidMount() {
     this.props.retrieveDecks();
-    console.log('decks mounted')
     //AsyncStorage.clear(()=>console.log('done'))
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('did update')
-  }
-
   goToDeck = title => {
-    this.props.navigation.navigate("Deck", this.props.decks[title])
+    this.props.navigation.navigate("Deck", this.props.decks[title]);
   };
 
   addDeck = () => {
@@ -36,7 +30,6 @@ class Decks extends Component {
   };
 
   render() {
-
     const { decks } = this.props;
 
     return (
@@ -66,12 +59,9 @@ class Decks extends Component {
   }
 }
 
-function mapStateToProps({ decks, deck, newDeck }) {
-  console.log('decks', decks)
-  console.log('deck', deck)
-  console.log('newDeck', newDeck)
+function mapStateToProps({ decks }) {
   return {
-    decks
+    decks: Object.assign({}, decks)
   };
 }
 

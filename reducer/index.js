@@ -1,4 +1,4 @@
-import { RETRIEVE_DECKS, RETRIEVE_DECK, ADD_DECK } from "../actions";
+import { RETRIEVE_DECKS, RETRIEVE_DECK, ADD_DECK, ADD_CARD } from "../actions";
 
 function decks(state = {}, action) {
   switch (action.type) {
@@ -15,9 +15,13 @@ function decks(state = {}, action) {
 			}
 
 		case ADD_DECK:
-			console.log('add deck', action.deck)
 			return {
-				newDeck: action.deck
+				decks: Object.assign(state.decks || {}, action.deck)
+			}
+
+		case ADD_CARD:
+			return {
+				cards: action.cards
 			}
 
     default:
