@@ -16,12 +16,15 @@ function decks(state = {}, action) {
 
 		case ADD_DECK:
 			return {
+				...state,
 				decks: Object.assign(state.decks || {}, action.deck)
 			}
 
 		case ADD_CARD:
+			//console.log('reducer',action);
 			return {
-				cards: action.cards
+				...state,
+				deck: action.deck
 			}
 
     default:

@@ -5,10 +5,10 @@ const DECKS_KEY = "MobileFlashcards:decks";
 export const getDecks = callback =>
   AsyncStorage.getItem(DECKS_KEY).then(data => callback(JSON.parse(data)));
 
-export const getDeck = (callback, title) =>
+export const getDeck = (title, callback) =>
   AsyncStorage.getItem(DECKS_KEY).then(data => {
     let decks = JSON.parse(data);
-    return callback(decks[title]);
+    callback(decks[title]);
   });
 
 export const saveDeckTitle = (title, callback) => {
@@ -18,10 +18,14 @@ export const saveDeckTitle = (title, callback) => {
   });
 };
 
-export const addCardToDeck = (card, title, callback) => {
-  let card_obj = { question: card.question, answer: card.answer };
-  
-};
+export const addCardToDeck = (title, card, callback) => {
+  let questions = { question: card.question, answer: card.answer };
 
-/* getDeck
-addCardToDeck */
+  getDeck(title, function(deck) {
+    deck.questions.push(questions);
+    let new_deck = { [title]: deck };
+    AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck)).then(() =>
+      callback(new_deck)
+    );
+  });
+};

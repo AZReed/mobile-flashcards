@@ -13,14 +13,14 @@ export const retrieveDecks = () => {
 };
 
 export const RETRIEVE_DECK = "RETRIEVE_DECK";
-export const retrieveDeck = deck => {
+export const retrieveDeck = title => {
   return dispatch => {
-    getDeck(function(data) {
+    getDeck(title, function(data) {
       dispatch({
         type: RETRIEVE_DECK,
         deck: data
       });
-    }, deck);
+    });
   };
 };
 
@@ -42,7 +42,7 @@ export const addCard = (title, card) => {
     addCardToDeck(title, card, function(data){
       dispatch({
         type: ADD_CARD,
-        card: data
+        deck: data
       });
     });
   };

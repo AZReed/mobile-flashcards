@@ -60,6 +60,7 @@ class Decks extends Component {
 }
 
 function mapStateToProps({ decks }) {
+  //console.log(decks)
   return {
     decks: Object.assign({}, decks)
   };
