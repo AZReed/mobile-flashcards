@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 
 class Deck extends Component {
   componentDidMount() {
-    console.log('DECK did mount')  
+    //console.log('DECK did mount',this.props.navigation.state.params)  
+    //console.log(this.props.navigation.state.key)
     const deck = this.props.navigation.state.params;
     this.props.retrieveDeck(deck.title)
   }
 
   componentDidUpdate(){
-    console.log('DECK did UPDATE', this.props.deck)
+    //console.log('DECK did UPDATE', this.props.deck)
   }
 
   addCard = () => {
@@ -19,8 +20,10 @@ class Deck extends Component {
     let deck = this.props.deck
     this.props.navigation.navigate("AddCard", deck);
   };
-
-  startQuiz = () => {};
+  
+  startQuiz = () => {
+    this.props.navigation.navigate("Quiz", this.props.deck);
+  };
 
   render() {
     //const deck = this.props.navigation.state.params;
@@ -63,7 +66,7 @@ class Deck extends Component {
 }
 
 function mapStateToProps(decks){
-  console.log('Map DECK',decks.deck)
+  //console.log('Map DECK',decks.deck)
   return {
     deck: decks.deck || {}
   }

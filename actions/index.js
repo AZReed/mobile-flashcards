@@ -39,10 +39,10 @@ export const addDeck = title => {
 export const ADD_CARD = "ADD_CARD";
 export const addCard = (title, card) => {
   return dispatch => {
-    addCardToDeck(title, card, function(data){
+    addCardToDeck(title, card, function(deck){
       dispatch({
         type: ADD_CARD,
-        deck: data
+        deck: deck
       });
     });
   };

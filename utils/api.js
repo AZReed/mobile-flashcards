@@ -25,7 +25,7 @@ export const addCardToDeck = (title, card, callback) => {
     deck.questions.push(questions);
     let new_deck = { [title]: deck };
     AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(new_deck)).then(() =>
-      callback(new_deck)
+      callback(deck)
     );
   });
 };

@@ -9,6 +9,12 @@ class AddDeck extends Component {
     input: "new Deck"
   };
 
+  componentDidUpdate(prevProps, prevState) {
+/*     if (this.props.deck) {
+      this.props.navigation.navigate("Deck", this.props.deck);
+    } */
+  }
+
   submit = () => {
     this.props.addDeck(this.state.text)
 /*     saveDeckTitle(function(data){
@@ -37,13 +43,19 @@ class AddDeck extends Component {
   }
 }
 
+function mapStateToProps({deck}){
+  return {
+    deck
+  }
+}
+
 function mapDispatchToProps(dispatch){
   return {
     addDeck: (title) => dispatch(addDeck(title))
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddDeck);
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
 
 const styles = StyleSheet.create({
   container: {
