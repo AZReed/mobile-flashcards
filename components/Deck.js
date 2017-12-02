@@ -2,18 +2,22 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { retrieveDeck } from "../actions";
 import { connect } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 
 class Deck extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: 'Deck',
     headerLeft: (
-      <Button
-        title='Decks'
-        onPress={function(){return this.props.navigation.navigate("Decks")}}
-      />
+      <View style={styles.center}>
+        <Ionicons name='ios-arrow-back' style={{marginLeft:10, color: '#3d94d9'}} size={32}/>
+        <Button
+          title='Decks'
+          onPress={() => navigation.navigate("Decks")}
+        />
+      </View>
     )
-  }
-  
+  })
+
   componentDidMount() {
     //console.log('DECK did mount',this.props.navigation.state.params)  
     //console.log(this.props.navigation.state.key)
@@ -99,5 +103,11 @@ const styles = StyleSheet.create({
     height: 100,
     alignItems: "center",
     marginTop: 100
-  }
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
