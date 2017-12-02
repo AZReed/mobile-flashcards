@@ -4,6 +4,16 @@ import { retrieveDeck } from "../actions";
 import { connect } from "react-redux";
 
 class Deck extends Component {
+  static navigationOptions = {
+    title: 'Deck',
+    headerLeft: (
+      <Button
+        title='Decks'
+        onPress={function(){return this.props.navigation.navigate("Decks")}}
+      />
+    )
+  }
+  
   componentDidMount() {
     //console.log('DECK did mount',this.props.navigation.state.params)  
     //console.log(this.props.navigation.state.key)

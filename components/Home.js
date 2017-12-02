@@ -34,14 +34,6 @@ const Stack = StackNavigator({
 	},
 	Deck: {
 		screen: Deck,
-		navigationOptions: {
-			title: 'Deck',
-/* 			headerLeft: (
-				<Button
-					title='Atras'
-				/>
-			) */
-		}
 	},
 	AddCard: {
 		screen: AddCard,

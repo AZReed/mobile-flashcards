@@ -2,36 +2,44 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 class Card extends Component {
+
   render() {
     return (
 			<View>
-				<Text>
-					{this.props.showAnswer ?
-						this.props.data.question
-						: this.props.data.answer
-					}
-					{this.props.data.question} - {this.props.data.answer}
-				</Text>
-
-				<View style={{marginTop: 50}}>
-					<Button
-						title='Show Answer'
-						onPress={() => this.showAnswer()}
-						/>
-				</View>
-				<View style={styles.buttons}>
-					<Button
-						style={styles.correctButton}
-						onPress={() => this.props.guess(true)}
-						title="correct"
-					/>
-					<Button
-						style={styles.incorrectButton}
-						onPress={() => this.props.guess(false)}
-						title="incorrect"
-					/>
-				</View>
-
+				{this.props.showAnswerState === false ?
+						(
+						<View>
+							<Text>
+								{this.props.data.question}
+							</Text>
+							<View>
+								<Button
+									title='Show Answer'
+									onPress={() => this.props.showAnswer()}
+									/>
+							</View>
+						</View>
+						)
+						: (
+						<View>
+							<Text>
+								{this.props.data.answer}
+							</Text>
+							<View style={styles.buttons}>
+								<Button
+									style={styles.correctButton}
+									onPress={() => this.props.guess(true)}
+									title="correct"
+								/>
+								<Button
+									style={styles.incorrectButton}
+									onPress={() => this.props.guess(false)}
+									title="incorrect"
+								/>
+							</View>
+						</View>
+						)
+				}
 			</View>
 		);
   }
@@ -56,11 +64,4 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50
   },
-  card: {
-    width: 200,
-    height: 400,
-    flex: 1,
-    justifyContent: "space-between",
-    marginTop: 100
-  }
 });
