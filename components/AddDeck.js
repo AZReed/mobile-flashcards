@@ -9,18 +9,11 @@ class AddDeck extends Component {
     input: "new Deck"
   };
 
-  componentDidUpdate(prevProps, prevState) {
-/*     if (this.props.deck) {
-      this.props.navigation.navigate("Deck", this.props.deck);
-    } */
-  }
-
   submit = () => {
     this.props.addDeck(this.state.text)
-/*     saveDeckTitle(function(data){
-      console.log('eo', data)
-    },this.state.text) */
-		this.props.navigation.goBack()
+    let deck = {};
+    deck['title'] = this.state.text;
+		this.props.navigation.navigate('Deck', deck)
   };
 
   render() {

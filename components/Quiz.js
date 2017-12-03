@@ -35,7 +35,17 @@ class Quiz extends Component {
   }
 
   startAgain() {
-    this.setState({ quizIndex: 0, answersGuess: [], showAnswerState: false });
+    this.setState({ 
+      quizIndex: 0,
+      answersGuess: [],
+      showAnswerState: false
+    });
+  }
+
+  result(){
+    let correct = this.state.answersGuess.filter((bool) => bool === true).length;
+    let result = (correct * 100 ) / this.state.answersGuess.length;
+    return <Text>{result} %</Text>
   }
 
   render() {
@@ -57,12 +67,17 @@ class Quiz extends Component {
               />
             </View>
           ) : (
-            <View style={styles.buttons}>
+            <View>
               <View>
-                <Button title="Go to Decks" onPress={() => this.goBack()} />
+                {this.result()}
               </View>
-              <View>
-                <Button title="Start Over" onPress={() => this.startAgain()} />
+              <View style={styles.buttons}>
+                <View>
+                  <Button title="Go to Decks" onPress={() => this.goBack()} />
+                </View>
+                <View>
+                  <Button title="Start Over" onPress={() => this.startAgain()} />
+                </View>
               </View>
             </View>
           )}

@@ -22,9 +22,6 @@ const Dashboard = () => (
 const Stack = StackNavigator({
   Decks: {
 		screen: Decks,
-		navigationOptions: {
-			title: 'Decks'
-		}
 	},
 	AddDeck: {
 		screen: AddDeck,

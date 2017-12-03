@@ -21,7 +21,7 @@ class Decks extends Component {
     title: 'Decks',
     headerLeft: null
   }
-  
+
   componentDidMount() {
     this.props.retrieveDecks();
     //AsyncStorage.clear(()=>console.log('done'))
