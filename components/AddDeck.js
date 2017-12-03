@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+//import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+import {
+  Body,
+  Button,
+  Input,
+  Item,
+  Container,
+  Content,
+  Form,
+  Text
+} from "native-base";
 import { addDeck } from "../actions";
-///import { saveDeckTitle } from "../utils/api";
 import { connect } from "react-redux";
 
 class AddDeck extends Component {
@@ -10,49 +19,46 @@ class AddDeck extends Component {
   };
 
   submit = () => {
-    this.props.addDeck(this.state.text)
+    this.props.addDeck(this.state.text);
     let deck = {};
-    deck['title'] = this.state.text;
-		this.props.navigation.navigate('Deck', deck)
+    deck["title"] = this.state.text;
+    this.props.navigation.navigate("Deck", deck);
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>What is the title of your new Deck</Text>
-        <TextInput
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={text => this.setState({ text })}
-          value={this.state.text}
-        />
-
-				<Button 
-					style={{ padding: 10 }}
-					onPress={() => this.submit()}
-					title="Submit"
-				/>
-      </View>
+      <Container style={{ alignItems: "center", justifyContent: 'center' }}>
+        <Container>
+          <Content>
+            <Text>What is the title of your new Deck</Text>
+            <Item last>
+              <Input
+                onChangeText={text => this.setState({ text })}
+                value={this.state.text}
+                />
+            </Item>
+          </Content>
+        </Container>
+        <Container>
+          <Button onPress={() => this.submit()}>
+            <Text>Submit</Text>
+          </Button>
+        </Container>
+      </Container>
     );
   }
 }
 
-function mapStateToProps({deck}){
+function mapStateToProps({ deck }) {
   return {
     deck
-  }
+  };
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
-    addDeck: (title) => dispatch(addDeck(title))
-  }
+    addDeck: title => dispatch(addDeck(title))
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 80
-  }
-});

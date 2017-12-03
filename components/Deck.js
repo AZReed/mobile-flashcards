@@ -1,86 +1,84 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+//import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { StyleSheet,TouchableOpacity } from "react-native";
+import { Toast, Card, CardItem, Body, Header, View, Text, Container, Content, Button } from "native-base";
 import { retrieveDeck } from "../actions";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 
 class Deck extends Component {
+  state = {
+    showToast: false
+  }
+  
   static navigationOptions = ({navigation}) => ({
     title: 'Deck',
     headerLeft: (
-      <View style={styles.center}>
+      <Container style={styles.center}>
         <Ionicons name='ios-arrow-back' style={{marginLeft:10, color: '#3d94d9'}} size={32}/>
-        <Button
-          title='Decks'
-          onPress={() => navigation.navigate("Decks")}
-        />
-      </View>
+        <Button transparent onPress={() => navigation.navigate("Decks")}>
+          <Text>Decks</Text>
+        </Button>
+      </Container>
     )
   })
 
   componentDidMount() {
-    //console.log('DECK did mount',this.props.navigation.state.params)  
-    //console.log(this.props.navigation.state.key)
     const deck = this.props.navigation.state.params;
     this.props.retrieveDeck(deck.title)
   }
 
-  componentDidUpdate(){
-    //console.log('DECK did UPDATE', this.props.deck)
-  }
-
   addCard = () => {
-    //const deck = this.props.navigation.state.params;
     let deck = this.props.deck
     this.props.navigation.navigate("AddCard", deck);
   };
-  
+
   startQuiz = () => {
+    let deck = this.props.deck
+    
+    if (deck.questions.length === 0) {
+      Toast.show({
+        text: 'No Cards to Quiz!',
+        position: 'bottom',
+        buttonText: 'Okay'
+      })
+      return;
+    }
     this.props.navigation.navigate("Quiz", this.props.deck);
   };
 
   render() {
-    //const deck = this.props.navigation.state.params;
     const deck = this.props.deck;
     return (
-      <View style={styles.deck}>
-        <Text>
-          {deck.title || ''} {deck.questions && deck.questions.length}
-        </Text>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center"
-          }}
-        >
-          <View
-            style={{
-              marginTop: 100,
-              width: 200,
-              height: 50,
-              backgroundColor: "powderblue"
-            }}
-          >
-            <Button onPress={() => this.addCard()} title="Add Card" />
-          </View>
-          <View
-            style={{
-              marginTop: 150,
-              width: 200,
-              height: 50,
-              backgroundColor: "powderblue"
-            }}
-          >
-            <Button onPress={() => this.startQuiz()} title="Start Quiz" />
-          </View>
-        </View>
-      </View>
+      <Container style={{marginTop: 50}}>
+        <Content>
+          <Card>
+            <CardItem>
+              <Body style={{flex:1, alignItems: 'center'}}>
+                <Text style={{fontWeight:'bold',fontSize: 60}}>
+                  {deck.title || ''}
+                </Text>
+                <Text style={{fontSize: 20}}>
+                  {deck.questions && deck.questions.length} cards
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+        <Container style={styles.buttons}>
+            <Button onPress={() => this.addCard()}>
+              <Text>Add Card</Text>
+            </Button>
+            <Button success onPress={() => this.startQuiz()}>
+              <Text>Start Quiz</Text>
+            </Button>
+        </Container>
+      </Container>
     );
   }
 }
 
 function mapStateToProps(decks){
-  //console.log('Map DECK',decks.deck)
   return {
     deck: decks.deck || {}
   }
@@ -93,21 +91,16 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deck);
-//export default Deck;
 
 const styles = StyleSheet.create({
-  deck: {
-    flex: 1,
-    justifyContent: "center",
-    width: 100,
-    height: 100,
-    alignItems: "center",
-    marginTop: 100
-  },
   center: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
   },
+  buttons: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  }
 });
