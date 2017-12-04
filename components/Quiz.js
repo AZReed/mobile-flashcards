@@ -11,11 +11,6 @@ class Quiz extends Component {
     showAnswer: false
   };
 
-  componentWillMount() {
-    const deck = this.props.navigation.state.params;
-    this.setState({ questions: deck.questions });
-  }
-
   showAnswer() {
     this.setState({ showAnswer: true });
   }
@@ -47,7 +42,7 @@ class Quiz extends Component {
   result(){
     clearLocalNotification()
       .then(setLocalNotification)
-    
+
     let correct = this.state.answersGuess.filter((bool) => bool === true).length;
     let result = (correct * 100 ) / this.state.answersGuess.length;
     return result;

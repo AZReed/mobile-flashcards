@@ -17,8 +17,8 @@ function decks(state = {}, action) {
     case ADD_DECK:
       return {
         ...state,
-        decks: Object.assign(state.decks || {}, action.deck)
-        //deck: action.deck
+        //decks: Object.assign(state.decks || {}, action.deck)
+        decks: {...state.decks, ...action.deck}
       };
 
 	case ADD_CARD:
