@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import Card from "./Card";
+import { StyleSheet } from "react-native";
+import { Card, CardItem, Body, Content, Container, Text, Button } from "native-base";
+import CardQuiz from "./CardQuiz";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 class Quiz extends Component {
   state = {
@@ -43,46 +45,55 @@ class Quiz extends Component {
   }
 
   result(){
+    clearLocalNotification()
+      .then(setLocalNotification)
+    
     let correct = this.state.answersGuess.filter((bool) => bool === true).length;
     let result = (correct * 100 ) / this.state.answersGuess.length;
-    return <Text>{result} %</Text>
+    return result;
+  }
+ 
+  remaining(deck){
+    return `${this.state.quizIndex + 1} / ${deck.questions.length}`
   }
 
   render() {
     const deck = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
-        <Text>{deck.title}</Text>
-        <View>
+      <Container>
+        <Text style={{alignSelf: 'center', fontWeight:'bold',fontSize: 60}}>{deck.title}</Text>
           {this.state.quizIndex < deck.questions.length ? (
-            <View style={styles.card}>
-              <Text>
-                {this.state.quizIndex + 1}/{deck.questions.length}
-              </Text>
-              <Card
+              <CardQuiz
                 guess={bool => this.guess(bool)}
                 data={deck.questions[this.state.quizIndex]}
                 showAnswer={() => this.showAnswer()}
                 showAnswerState={this.state.showAnswer}
+                remaining={this.remaining(deck)}
               />
-            </View>
           ) : (
-            <View>
-              <View>
-                {this.result()}
-              </View>
-              <View style={styles.buttons}>
-                <View>
-                  <Button title="Go to Decks" onPress={() => this.goBack()} />
-                </View>
-                <View>
-                  <Button title="Start Over" onPress={() => this.startAgain()} />
-                </View>
-              </View>
-            </View>
+            <Container>
+              <Content>
+                <Card>
+                  <CardItem>
+                    <Body style={styles.result}>
+                      <Text style={{ fontSize: 50, fontWeight: 'bold'}}>
+                        {this.result()}%
+                      </Text>
+                    </Body>
+                  </CardItem>
+                </Card>
+              </Content>
+              <Container style={styles.buttons}>
+                <Button onPress={() => this.goBack()}>
+                  <Text>Go to Decks</Text>
+                </Button>
+                <Button onPress={() => this.startAgain()}>
+                  <Text>Start Over</Text>
+                </Button>
+              </Container>
+            </Container>
           )}
-        </View>
-      </View>
+      </Container>
     );
   }
 }
@@ -90,37 +101,13 @@ class Quiz extends Component {
 export default Quiz;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems: "stretch",
-    marginTop: 100
-  },
-  addButton: {
-    alignItems: "center",
-    marginTop: 400
-  },
-  card: {
-    width: 200,
-    height: 400,
-    flex: 1,
-    justifyContent: "space-between",
-    marginTop: 100
-  },
   buttons: {
-    width: 100,
-    height: 200,
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 100
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
-  correctButton: {
-    width: 100,
-    height: 50
-  },
-  incorrectButton: {
-    width: 100,
-    height: 50
+  result: {
+    flex: 1,
+    alignItems: 'center'
   }
-});
+})
