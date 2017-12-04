@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 import {
   Body,
   Button,
@@ -27,18 +26,16 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <Container style={{ alignItems: "center", justifyContent: 'center' }}>
-        <Container>
-          <Content>
-            <Text>What is the title of your new Deck</Text>
-            <Item last>
-              <Input
-                onChangeText={text => this.setState({ text })}
-                value={this.state.text}
-                />
-            </Item>
-          </Content>
-        </Container>
+      <Container style={{ flex: 1, alignItems: 'center' }}>
+        <Content style={{alignSelf: 'stretch'}}>
+          <Text>What is the title of your new Deck</Text>
+          <Item last>
+            <Input
+              onChangeText={text => this.setState({ text })}
+              value={this.state.text}
+              />
+          </Item>
+        </Content>
         <Container>
           <Button onPress={() => this.submit()}>
             <Text>Submit</Text>

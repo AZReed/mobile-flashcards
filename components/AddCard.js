@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import {
+/* import {
   Text,
   View,
   StyleSheet,
   Button,
   TouchableOpacity,
   TextInput
-} from "react-native";
+} from "react-native"; */
+import { Item, Text, Container, Content, Button, Input } from "native-base";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
-//import { addCardToDeck } from "../utils/api";
 
 class AddCard extends Component {
   state = {
@@ -26,26 +26,35 @@ class AddCard extends Component {
   render() {
     const deck = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
-        <Text>Add a New Card to {deck.title} Deck</Text>
-        <TextInput
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={question => this.setState({ question })}
-          value={this.state.question}
-        />
+      <Container style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
+        <Container style={{alignSelf: 'stretch'}}>
+          <Content>
+            <Text>({deck.title}) Question</Text>
+            <Item last>
+              <Input
+                onChangeText={question => this.setState({ question })}
+                value={this.state.question}
+              />
+            </Item>
 
-        <Text>Answer</Text>
-        <TextInput
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          onChangeText={answer => this.setState({ answer })}
-          value={this.state.answer}
-        />
-        <Button
-          style={{ padding: 10 }}
-          onPress={() => this.submit()}
-          title="Submit"
-        />
-      </View>
+            <Text>Answer</Text>
+            <Item last>
+              <Input
+                onChangeText={answer => this.setState({ answer })}
+                value={this.state.answer}
+              />
+            </Item>
+          </Content>
+        </Container>
+        <Container>
+          <Button
+            style={{ padding: 10 }}
+            onPress={() => this.submit()}
+          >
+            <Text>Submit</Text>
+          </Button>
+        </Container>
+      </Container>
     );
   }
 }
@@ -57,10 +66,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(AddCard);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 100
-  }
-});

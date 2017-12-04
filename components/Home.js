@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "native-base";
+//import { Container } from "native-base";
 import CustomStatusBar from "./CustomStatusBar";
 import { StackNavigator } from "react-navigation";
 import { Root } from "native-base";
@@ -40,10 +40,8 @@ class Home extends Component {
   render() {
     return (
 			<Root>
-				<Container>
-					<CustomStatusBar backgroundColor={"#f26f28"} barStyle="light-content" />
-					<Stack />
-				</Container>
+				<CustomStatusBar backgroundColor={"grey"} barStyle="light-content" />
+				<Stack />
 			</Root>
     );
   }

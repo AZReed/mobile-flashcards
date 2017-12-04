@@ -10,7 +10,7 @@ class Deck extends Component {
   state = {
     showToast: false
   }
-  
+
   static navigationOptions = ({navigation}) => ({
     title: 'Deck',
     headerLeft: (
