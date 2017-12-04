@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Item, Text, Container, Content, Button, Input } from "native-base";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
+import { Keyboard } from 'react-native'
 
 class AddCard extends Component {
   state = {
@@ -12,6 +13,7 @@ class AddCard extends Component {
   submit = () => {
     const deck = this.props.navigation.state.params;
     this.props.addCard(deck.title, this.state);
+    Keyboard.dismiss();
 		this.props.navigation.navigate("Deck", deck);
   };
 

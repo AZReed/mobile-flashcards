@@ -11,6 +11,7 @@ import {
 } from "native-base";
 import { addDeck } from "../actions";
 import { connect } from "react-redux";
+import { Keyboard } from "react-native";
 
 class AddDeck extends Component {
   state = {
@@ -19,8 +20,9 @@ class AddDeck extends Component {
 
   submit = () => {
     this.props.addDeck(this.state.text);
-    let deck = {};
-    deck["title"] = this.state.text;
+    let deck = { title: this.state.text};
+    //deck["title"] = this.state.text;
+    Keyboard.dismiss()
     this.props.navigation.navigate("Deck", deck);
   };
 
