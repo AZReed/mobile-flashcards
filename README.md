@@ -6,7 +6,7 @@ A small mobile app done with React Native that allows users to study collections
 
 ## Prerequisites
 
-This software was built and tested with React Native on a Mac machine.
+This software was built and tested with React Native on a Mac machine. Emulation was on an iPhone 5s
 
 https://facebook.github.io/react-native
 
