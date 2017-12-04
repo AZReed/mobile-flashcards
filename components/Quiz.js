@@ -45,6 +45,7 @@ class Quiz extends Component {
 
     let correct = this.state.answersGuess.filter((bool) => bool === true).length;
     let result = (correct * 100 ) / this.state.answersGuess.length;
+    result = Math.round(result * 100) / 100
     return result;
   }
  
