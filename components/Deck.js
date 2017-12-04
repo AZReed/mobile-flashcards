@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { StyleSheet,TouchableOpacity } from "react-native";
 import { Toast, Card, CardItem, Body, Header, View, Text, Container, Content, Button } from "native-base";
 import { retrieveDeck } from "../actions";

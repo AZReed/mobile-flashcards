@@ -11,7 +11,6 @@ import {
   Button,
   Body
 } from "native-base";
-import { Entypo } from "@expo/vector-icons";
 import { retrieveDecks } from "../actions";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
@@ -34,7 +33,7 @@ class Decks extends Component {
   addDeck = () => {
     this.props.navigation.navigate("AddDeck");
   };
-
+  
   render() {
     const { decks } = this.props;
 
@@ -42,7 +41,7 @@ class Decks extends Component {
       <Container>
         <Content>
           <Card>
-            {this.props.decks &&
+            {this.props.decks && Object.keys(this.props.decks).length ?
               Object.keys(this.props.decks).map((deck, num) => (
                 <CardItem key={decks[deck]["title"]}>
                   <Body>
@@ -60,7 +59,13 @@ class Decks extends Component {
                     </TouchableOpacity>
                   </Body>
                 </CardItem>
-              ))}
+              ))
+            : <CardItem>
+                <Body>
+                  <Text>No Decks Yet. Add your first Deck!!</Text>
+                </Body>
+              </CardItem>
+            }
           </Card>
           <Container style={{alignSelf: 'center', marginTop: 30}}>
             <Button

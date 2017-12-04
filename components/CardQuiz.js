@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { View, Text, StyleSheet, Button } from "react-native";
 import { StyleSheet } from "react-native";
 import { H1, H3, Card, CardItem, Body, Content, Container, Text, Button } from "native-base";
 

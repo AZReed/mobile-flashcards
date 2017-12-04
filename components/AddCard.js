@@ -1,12 +1,4 @@
 import React, { Component } from "react";
-/* import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  TouchableOpacity,
-  TextInput
-} from "react-native"; */
 import { Item, Text, Container, Content, Button, Input } from "native-base";
 import { addCard } from "../actions";
 import { connect } from "react-redux";
