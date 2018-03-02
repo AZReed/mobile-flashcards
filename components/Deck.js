@@ -13,12 +13,10 @@ class Deck extends Component {
   static navigationOptions = ({navigation}) => ({
     title: 'Deck',
     headerLeft: (
-      <Container style={styles.center}>
+      <Button style={styles.center} transparent onPress={() => navigation.navigate("Decks")}>
         <Ionicons name='ios-arrow-back' style={{marginLeft:10, color: '#3d94d9'}} size={32}/>
-        <Button transparent onPress={() => navigation.navigate("Decks")}>
-          <Text>Decks</Text>
-        </Button>
-      </Container>
+        <Text style={{marginLeft:-10}}>Decks</Text>
+      </Button>
     )
   })
 
@@ -34,7 +32,7 @@ class Deck extends Component {
 
   startQuiz = () => {
     let deck = this.props.deck
-    
+
     if (deck.questions.length === 0) {
       Toast.show({
         text: 'No Cards to Quiz!',

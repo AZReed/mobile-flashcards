@@ -11,6 +11,11 @@ class Quiz extends Component {
     showAnswer: false
   };
 
+  componentDidMount() {
+    clearLocalNotification()
+      .then(() => console.log("notifications cleared"))
+  }
+
   showAnswer() {
     this.setState({ showAnswer: true });
   }
