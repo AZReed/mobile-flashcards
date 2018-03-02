@@ -12,9 +12,16 @@ https://facebook.github.io/react-native
 
 
 ## Installation
+Tested with npm 4.6.1. Also tested with npm 5.* , no problems so far, but still could be some issues.
 ```
 npm install
 npm start
+```
+
+or
+```
+yarn //or yarn install
+yarn start
 ```
 
 It can complain about been unable to start the server, if thats the case, follow the instructions and put this on your terminal and try  again.
