@@ -30,6 +30,16 @@ sudo sysctl -w kern.maxfiles=5242880
 sudo sysctl -w kern.maxfilesperproc=524288
 ````
 
+## Warning about notification API
+
+If by simulating the app in iOS, you got a notification about the Quiz app that keeps running after simulation ended then you should uncomment this bit in the file Quiz.js, line 15. Start any quiz in the app simulation and you should see the log in the console.
+
+```
+componentDidMount() {
+  clearLocalNotification()
+    .then(() => console.log("notifications cleared"))
+}
+```
 
 ## Built With
 
