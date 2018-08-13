@@ -1,6 +1,6 @@
 ## Mobile Flashcards App
 
-iOS version ONLY.
+Tested in an iOS device ONLY.
 A small mobile app done with React Native that allows users to study collections of flashcards. The app allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks.
 
 
@@ -10,9 +10,11 @@ This software was built and tested with React Native on a Mac machine. Emulation
 
 https://facebook.github.io/react-native
 
+This project is tested on node v8.11.2 and v10.8.0, the latest version of XCode and Yarn 1.9.4.
+
 
 ## Installation
-Tested with npm 4.6.1. Also tested with npm 5.* , no problems so far, but still could be some issues.
+Yarn recommended. Tested with npm 6.2.0 no problems so far, but still could be some issues with npm.
 ```
 npm install
 npm start
@@ -30,9 +32,18 @@ sudo sysctl -w kern.maxfiles=5242880
 sudo sysctl -w kern.maxfilesperproc=524288
 ````
 
+
+## Use
+
+![Alt Text](./pic/Deck.gif)
+
+![Alt Text](./pic/Quiz.gif)
+
+
+
 ## Warning about notification API
 
-If by simulating the app in iOS, you got a notification about the Quiz app that keeps running after simulation ended then you should uncomment this bit in the file Quiz.js, line 15. Start any quiz in the app simulation and you should see the log in the console.
+If by simulating the app on your iOS device, you got a notification about the Quiz app that keeps running after the simulation ends, then you should uncomment this bit in the file Quiz.js, line 15. Start any quiz in the app simulation and you should see the log in the console.
 
 ```
 componentDidMount() {
@@ -40,6 +51,7 @@ componentDidMount() {
     .then(() => console.log("notifications cleared"))
 }
 ```
+
 
 ## Built With
 

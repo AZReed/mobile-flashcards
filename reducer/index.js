@@ -21,12 +21,12 @@ function decks(state = {}, action) {
         decks: {...state.decks, ...action.deck}
       };
 
-	case ADD_CARD:
-	  state.decks[action.deck.title] = action.deck;
-      return {
-        ...state,
-        deck: action.deck
-      };
+	  case ADD_CARD:
+      state.decks[action.deck.title] = action.deck;
+        return {
+          ...state,
+          deck: action.deck
+        };
 
     default:
       return state;
