@@ -9,7 +9,8 @@ import {
   Content,
   Container,
   Text,
-  Button
+	Button,
+	View
 } from "native-base";
 
 const CardQuiz = (props) => {
@@ -32,27 +33,32 @@ const CardQuiz = (props) => {
 			{props.showAnswerState === false ? (
 				<Content>
 					{card("question")}
-					<Container style={{ flex: 1, alignSelf: "center" }}>
-						<Button onPress={() => props.showAnswer()}>
+					<Button
+						full
+						style={styles.buttons}
+						onPress={() => props.showAnswer()}>
 							<Text>Show Answer</Text>
-						</Button>
-					</Container>
+					</Button>
 				</Content>
 			) : (
 				<Content>
 					{card("answer")}
 					<Container
-						style={{
-							flex: 1,
-							flexDirection: "row",
-							justifyContent: "space-around"
-						}}
+						style={styles.buttons}
 					>
-						<Button success onPress={() => props.guess(true)}>
-							<Text>Correct</Text>
+						<Button
+							full
+							success
+							style={{flex: 1}}
+							onPress={() => props.guess(true)}>
+								<Text>Correct</Text>
 						</Button>
-						<Button danger onPress={() => props.guess(false)}>
-							<Text>Incorrect</Text>
+						<Button
+							full
+							danger
+							style={{flex: 1}}
+							onPress={() => props.guess(false)}>
+								<Text>Incorrect</Text>
 						</Button>
 					</Container>
 				</Content>
@@ -67,5 +73,11 @@ const styles = StyleSheet.create({
   cardPosition: {
     flex: 1,
     alignItems: "center"
+	},
+	buttons: {
+    flexDirection: 'row',
+    padding: 10,
+    margin: 10,
+    marginTop: 20
   }
 });

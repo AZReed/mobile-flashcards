@@ -20,9 +20,8 @@ class AddCard extends Component {
   render() {
     const deck = this.props.navigation.state.params;
     return (
-      <Container style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
-        <Container style={{alignSelf: 'stretch'}}>
-          <Content>
+      <Container>
+          <Content style={{padding: 10, alignSelf: 'stretch'}}>
             <Text>({deck.title}) Question</Text>
             <Item last>
               <Input
@@ -38,16 +37,14 @@ class AddCard extends Component {
                 value={this.state.answer}
               />
             </Item>
-          </Content>
-        </Container>
-        <Container>
           <Button
-            style={{ padding: 10 }}
+            full
+            style={{ marginTop: 20 }}
             onPress={() => this.submit()}
           >
             <Text>Submit</Text>
           </Button>
-        </Container>
+        </Content>
       </Container>
     );
   }

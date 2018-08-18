@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { Card, CardItem, Body, Content, Container, Text, Button } from "native-base";
+import { Card, View, CardItem, Body, Content, Container, Text, Button } from "native-base";
 import CardQuiz from "./CardQuiz";
 import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
@@ -63,38 +63,45 @@ class Quiz extends Component {
     const deck = this.props.navigation.state.params;
     return (
       <Container>
-        <Text style={{alignSelf: 'center', fontWeight:'bold',fontSize: 60}}>{deck.title}</Text>
-          {this.state.quizIndex < deck.questions.length ? (
-              <CardQuiz
-                guess={bool => this.guess(bool)}
-                data={deck.questions[this.state.quizIndex]}
-                showAnswer={() => this.showAnswer()}
-                showAnswerState={this.state.showAnswer}
-                remaining={this.remaining(deck)}
-              />
+        <Content>
+          <Text style={{alignSelf: 'center', fontWeight:'bold',fontSize: 60}}>{deck.title}</Text>
+            {this.state.quizIndex < deck.questions.length ? (
+                <CardQuiz
+                  guess={bool => this.guess(bool)}
+                  data={deck.questions[this.state.quizIndex]}
+                  showAnswer={() => this.showAnswer()}
+                  showAnswerState={this.state.showAnswer}
+                  remaining={this.remaining(deck)}
+                />
           ) : (
-            <Container>
-              <Content>
-                <Card>
-                  <CardItem>
-                    <Body style={styles.result}>
-                      <Text style={{ fontSize: 50, fontWeight: 'bold'}}>
-                        {this.result()}%
-                      </Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-              </Content>
-              <Container style={styles.buttons}>
-                <Button onPress={() => this.goBack()}>
-                  <Text>Go to Decks</Text>
+            <View>
+              <Card>
+                <CardItem>
+                  <Body style={styles.result}>
+                    <Text style={{ fontSize: 50, fontWeight: 'bold'}}>
+                      {this.result()}%
+                    </Text>
+                  </Body>
+                </CardItem>
+              </Card>
+              <View style={styles.buttons}>
+                <Button
+                  full
+                  style={{flex: 1}}
+                  onPress={() => this.goBack()}>
+                    <Text>Go to Decks</Text>
                 </Button>
-                <Button onPress={() => this.startAgain()}>
-                  <Text>Start Over</Text>
+                <Button
+                  full
+                  success
+                  style={{flex: 1}}
+                  onPress={() => this.startAgain()}>
+                    <Text>Start Over</Text>
                 </Button>
-              </Container>
-            </Container>
+              </View>
+            </View>
           )}
+          </Content>
       </Container>
     );
   }
@@ -104,9 +111,9 @@ export default Quiz;
 
 const styles = StyleSheet.create({
   buttons: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    margin: 10,
+    marginTop: 20
   },
   result: {
     flex: 1,

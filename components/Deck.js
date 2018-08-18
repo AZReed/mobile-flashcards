@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet,TouchableOpacity } from "react-native";
-import { Toast, Card, CardItem, Body, Header, View, Text, Container, Content, Button } from "native-base";
+import { StyleSheet } from "react-native";
+import { Toast, Card, CardItem, Body, View, Text, Container, Content, Button } from "native-base";
 import { retrieveDeck } from "../actions";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
@@ -47,7 +47,7 @@ class Deck extends Component {
   render() {
     const deck = this.props.deck;
     return (
-      <Container style={{marginTop: 50}}>
+      <Container >
         <Content>
           <Card>
             <CardItem>
@@ -61,15 +61,23 @@ class Deck extends Component {
               </Body>
             </CardItem>
           </Card>
+        {/* <Container style={styles.buttons}> */}
+          <View style={styles.buttons}>
+            <Button
+              style={{ flex: 1}}
+              full
+              onPress={() => this.addCard()}>
+                <Text>Add Card</Text>
+            </Button>
+            <Button 
+              success
+              style={{ flex: 1}}
+              full
+              onPress={() => this.startQuiz()}>
+                <Text>Start Quiz</Text>
+            </Button>
+          </View>
         </Content>
-        <Container style={styles.buttons}>
-            <Button onPress={() => this.addCard()}>
-              <Text>Add Card</Text>
-            </Button>
-            <Button success onPress={() => this.startQuiz()}>
-              <Text>Start Quiz</Text>
-            </Button>
-        </Container>
       </Container>
     );
   }
@@ -96,8 +104,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttons: {
-    flex:1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    padding: 10,
+    margin: 10,
+    marginTop: 20
   }
 });

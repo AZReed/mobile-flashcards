@@ -33,13 +33,13 @@ class Decks extends Component {
   addDeck = () => {
     this.props.navigation.navigate("AddDeck");
   };
-  
+
   render() {
     const { decks } = this.props;
 
     return (
       <Container>
-        <Content>
+        <Content >
           <Card>
             {this.props.decks && Object.keys(this.props.decks).length ?
               Object.keys(this.props.decks).map((deck, num) => (
@@ -67,13 +67,13 @@ class Decks extends Component {
               </CardItem>
             }
           </Card>
-          <Container style={{alignSelf: 'center', marginTop: 30}}>
             <Button
+              full
+              style={{ padding: 10, margin: 10, marginTop: 20 }}
               onPress={() => this.addDeck()}
             >
               <Text>Add Deck</Text>
             </Button>
-          </Container>
         </Content>
       </Container>
     );

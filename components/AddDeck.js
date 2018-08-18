@@ -4,14 +4,17 @@ import {
   Button,
   Input,
   Item,
+  Form,
   Container,
   Content,
-  Form,
+  Footer,
   Text
 } from "native-base";
 import { addDeck } from "../actions";
 import { connect } from "react-redux";
 import { Keyboard } from "react-native";
+// import { Header } from 'react-navigation';
+
 
 class AddDeck extends Component {
   state = {
@@ -27,23 +30,46 @@ class AddDeck extends Component {
   };
 
   render() {
+    // console.log('***' + Header.HEIGHT + '***');
     return (
-      <Container style={{ flex: 1, alignItems: 'center' }}>
-        <Content style={{alignSelf: 'stretch'}}>
-          <Text>What is the title of your new Deck</Text>
-          <Item last>
-            <Input
+        <Container style={{padding: 10}}>
+{/*           <Content style={{alignSelf: 'stretch'}}>
+            <Body>
+              <Text>What is the title of your new Deck</Text>
+              <Item last>
+              <Input
               onChangeText={text => this.setState({ text })}
               value={this.state.text}
               />
-          </Item>
-        </Content>
-        <Container>
-          <Button onPress={() => this.submit()}>
-            <Text>Submit</Text>
-          </Button>
+              </Item>
+              </Body>
+              <Footer>
+              <Button onPress={() => this.submit()}>
+              <Text>Submit</Text>
+              </Button>
+              </Footer>
+            </Content> */}
+          <Content>
+            <Body>
+              <Text>What is the title of your new Deck?</Text>
+            </Body>
+            <Form>
+              <Item last>
+                <Input
+                  placeholder="Deck Name"
+                  onChangeText={text => this.setState({ text })}
+                  value={this.state.text}
+                />
+                </Item>
+            </Form>
+            <Button
+              full
+              style={{ marginTop: 20 }}
+              onPress={() => this.submit()}>
+              <Text>Submit</Text>
+            </Button>
+          </Content>
         </Container>
-      </Container>
     );
   }
 }
